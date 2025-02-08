@@ -1,0 +1,63 @@
+# Built application files
+*.apk
+*.aab
+*.ap_
+
+# Android Studio generated files
+*.iml
+.gradle/
+/local.properties
+/.idea/
+build/
+/captures/
+.navigation/
+output.json
+
+# Native development files
+.externalNativeBuild/
+.cxx/
+obj/
+
+# Signing & keys
+*.jks
+*.keystore
+.signing/
+
+# Compiled files
+*.class
+*.dex
+
+# Generated directories
+bin/
+gen/
+out/
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logs and crashes
+*.log
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# IDE specific
+*.ctxt
+*~
+*.swp
+.settings/
+.classpath
+.project
+.cproject
+
+# Google Services
+google-services.json
+
+# Temporary files
+.mtj.tmp/
