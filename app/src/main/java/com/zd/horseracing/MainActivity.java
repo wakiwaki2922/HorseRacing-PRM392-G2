@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,17 +29,28 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar4;
 
     private int balance = 1000;
-    private int betAmount = 0;
-    private ArrayList<Integer> selectedHorses;
     private boolean isRacing = false;
     private Handler handler;
+
+    private static class HorseBet {
+        int horseNumber;
+        int betAmount;
+
+        HorseBet(int horseNumber, int betAmount) {
+            this.horseNumber = horseNumber;
+            this.betAmount = betAmount;
+        }
+    }
+
+    private ArrayList<HorseBet> selectedHorseBets;
+    private int totalBetAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        selectedHorses = new ArrayList<>();
+        selectedHorseBets = new ArrayList<>();
         handler = new Handler(Looper.getMainLooper());
 
         initViews();
@@ -80,18 +92,52 @@ public class MainActivity extends AppCompatActivity {
                 dialog.findViewById(R.id.checkBox4)
         };
 
-        for (int horseIndex : selectedHorses) {
-            checkBoxes[horseIndex - 1].setChecked(true);
+        EditText[] betInputs = new EditText[]{
+                dialog.findViewById(R.id.etBet1),
+                dialog.findViewById(R.id.etBet2),
+                dialog.findViewById(R.id.etBet3),
+                dialog.findViewById(R.id.etBet4)
+        };
+
+        // Restore previous selections and bets
+        for (HorseBet bet : selectedHorseBets) {
+            checkBoxes[bet.horseNumber - 1].setChecked(true);
+            betInputs[bet.horseNumber - 1].setText(String.valueOf(bet.betAmount));
         }
 
-        dialog.setOnDismissListener(dialogInterface -> {
-            selectedHorses.clear();
+        Button btnConfirm = dialog.findViewById(R.id.btnConfirm);
+        btnConfirm.setOnClickListener(v -> {
+            // Validate and save bets
+            selectedHorseBets.clear();
+            totalBetAmount = 0;
+
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (checkBoxes[i].isChecked()) {
-                    selectedHorses.add(i + 1);
+                    String betStr = betInputs[i].getText().toString();
+                    if (betStr.isEmpty()) {
+                        Toast.makeText(this, "Vui lòng nhập số tiền cược cho ngựa " + (i + 1), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    int betAmount = Integer.parseInt(betStr);
+                    if (betAmount <= 0) {
+                        Toast.makeText(this, "Số tiền cược phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    selectedHorseBets.add(new HorseBet(i + 1, betAmount));
+                    totalBetAmount += betAmount;
                 }
             }
-            betAmount = selectedHorses.size() * 10;
+
+            if (totalBetAmount > balance) {
+                Toast.makeText(this, "Không đủ tiền cược", Toast.LENGTH_SHORT).show();
+                selectedHorseBets.clear();
+                totalBetAmount = 0;
+                return;
+            }
+
+            dialog.dismiss();
             updateUI();
         });
 
@@ -99,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRace() {
-        if (selectedHorses.isEmpty()) {
+        if (selectedHorseBets.isEmpty()) {
             Toast.makeText(this, "Vui lòng chọn ngựa trước", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (betAmount > balance) {
+        if (totalBetAmount > balance) {
             Toast.makeText(this, "Không đủ tiền cược", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -112,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         isRacing = true;
         btnChooseHorse.setEnabled(false);
         btnStart.setEnabled(false);
+        balance -= totalBetAmount; // Trừ tiền cược trước khi đua
         updateUI();
 
         handler.post(new Runnable() {
@@ -142,35 +189,33 @@ public class MainActivity extends AppCompatActivity {
     private void handleWinner(int winningHorse) {
         isRacing = false;
 
-        // Tính toán tiền thưởng/phạt
         int totalWinnings = 0;
         int totalLosses = 0;
         StringBuilder resultMessage = new StringBuilder();
 
-        // Kiểm tra ngựa thắng
-        if (selectedHorses.contains(winningHorse)) {
-            // Thắng x2 tiền cược của con thắng
-            int winAmount = 20; // 10 * 2 (tiền cược mỗi con là 10)
-            totalWinnings += winAmount;
-            resultMessage.append("Ngựa ").append(winningHorse).append(" về nhất! +").append(winAmount).append("đ\n");
-        }
-
-        // Tính tiền thua cho các con ngựa đã đặt không về nhất
-        for (int horse : selectedHorses) {
-            if (horse != winningHorse) {
-                // Thua mất 50% tiền cược mỗi con
-                int lossAmount = 5; // 50% của 10
+        // Check winning horse
+        for (HorseBet bet : selectedHorseBets) {
+            if (bet.horseNumber == winningHorse) {
+                // Win 2x the bet amount
+                int winAmount = bet.betAmount * 2;
+                totalWinnings += winAmount;
+                resultMessage.append("Ngựa ").append(bet.horseNumber)
+                        .append(" về nhất! +").append(winAmount).append("đ\n");
+            } else {
+                // Lose 50% of the bet amount
+                int lossAmount = bet.betAmount / 2;
                 totalLosses += lossAmount;
-                resultMessage.append("Ngựa ").append(horse).append(" thua: -").append(lossAmount).append("đ\n");
+                resultMessage.append("Ngựa ").append(bet.horseNumber)
+                        .append(" thua: -").append(lossAmount).append("đ\n");
             }
         }
 
-        // Cập nhật số dư
+        // Update balance
         int netChange = totalWinnings - totalLosses;
-        balance += netChange;
+        balance += (totalWinnings); // Cộng tiền thắng vào (tiền thua đã trừ lúc bắt đầu đua)
 
-        // Thêm tổng kết vào thông báo
-        resultMessage.append("\nTổng cộng: ").append(netChange > 0 ? "+" : "").append(netChange).append("đ");
+        resultMessage.append("\nTổng cộng: ").append(netChange > 0 ? "+" : "")
+                .append(netChange).append("đ");
 
         new AlertDialog.Builder(this)
                 .setTitle("Kết quả")
@@ -188,8 +233,8 @@ public class MainActivity extends AppCompatActivity {
         seekBar3.setProgress(0);
         seekBar4.setProgress(0);
 
-        selectedHorses.clear();
-        betAmount = 0;
+        selectedHorseBets.clear();
+        totalBetAmount = 0;
         isRacing = false;
 
         btnChooseHorse.setEnabled(true);
@@ -201,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI() {
         tvBalance.setText(String.valueOf(balance));
-        tvBet.setText(String.valueOf(betAmount));
+        tvBet.setText(String.valueOf(totalBetAmount));
     }
 
     @Override
