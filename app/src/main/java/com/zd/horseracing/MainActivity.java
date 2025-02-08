@@ -68,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupListeners() {
         btnChooseHorse.setOnClickListener(v -> showChooseHorseDialog());
         btnStart.setOnClickListener(v -> startRace());
-        btnReset.setOnClickListener(v -> viewModel.resetRace());
+        btnReset.setOnClickListener(v -> {
+            resetSeekBars();
+            viewModel.resetRace();
+        });
     }
 
     private void observeViewModel() {
@@ -81,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getIsRacing().observe(this, isRacing -> {
             btnChooseHorse.setEnabled(!isRacing);
             btnStart.setEnabled(!isRacing);
+            btnReset.setEnabled(!isRacing);
+        });
+
+        viewModel.getNeedsReset().observe(this, needsReset -> {
+            if (needsReset) {
+                btnChooseHorse.setEnabled(false);
+                btnStart.setEnabled(false);
+                btnReset.setEnabled(true);
+            }
         });
 
         viewModel.getRaceResult().observe(this, result -> {
@@ -183,13 +195,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void resetSeekBars() {
+        seekBar1.setProgress(0);
+        seekBar2.setProgress(0);
+        seekBar3.setProgress(0);
+        seekBar4.setProgress(0);
+    }
+
     private void showResultDialog(String result) {
         new AlertDialog.Builder(this)
                 .setTitle("Kết quả")
                 .setMessage(result)
-                .setPositiveButton("OK", (dialog, which) -> {
-                    btnReset.setEnabled(true);
-                })
+                .setPositiveButton("OK", (dialog, which) -> {})
                 .show();
     }
 
