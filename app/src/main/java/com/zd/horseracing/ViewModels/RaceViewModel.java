@@ -142,4 +142,9 @@ public class RaceViewModel extends AndroidViewModel {
         balance.setValue(repository.getBalance());
         totalBet.setValue(repository.getTotalBetAmount());
     }
+
+    public void updateBalance(int amount) {
+        repository.updateBalance(amount);
+        updateBalanceAndBet();
+    }
 }

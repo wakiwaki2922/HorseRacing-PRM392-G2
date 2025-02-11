@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChooseHorse;
     private Button btnStart;
     private Button btnReset;
+    private Button btnAddMoney;
     private SeekBar seekBar1;
     private SeekBar seekBar2;
     private SeekBar seekBar3;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnChooseHorse = findViewById(R.id.btnChooseHorse);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
+        btnAddMoney = findViewById(R.id.btnAddMoney);
         seekBar1 = findViewById(R.id.seekBar1);
         seekBar2 = findViewById(R.id.seekBar2);
         seekBar3 = findViewById(R.id.seekBar3);
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             resetSeekBars();
             viewModel.resetRace();
         });
+        btnAddMoney.setOnClickListener(v -> showAddMoneyDialog());
     }
 
     private void observeViewModel() {
@@ -208,6 +211,39 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(result)
                 .setPositiveButton("OK", (dialog, which) -> {})
                 .show();
+    }
+
+    private void showAddMoneyDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_add_money);
+
+        EditText etAddMoney = dialog.findViewById(R.id.etAddMoney);
+        Button btnConfirmAddMoney = dialog.findViewById(R.id.btnConfirmAddMoney);
+
+        btnConfirmAddMoney.setOnClickListener(v -> {
+            String moneyStr = etAddMoney.getText().toString();
+            if (moneyStr.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập số tiền", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                int amountToAdd = Integer.parseInt(moneyStr);
+                if (amountToAdd <= 0) {
+                    Toast.makeText(this, "Số tiền phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Cập nhật số dư trong ViewModel
+                viewModel.updateBalance(amountToAdd);
+                Toast.makeText(this, "Nạp tiền thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Số tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override
