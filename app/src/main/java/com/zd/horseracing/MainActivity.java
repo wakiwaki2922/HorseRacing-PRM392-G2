@@ -206,11 +206,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showResultDialog(String result) {
-        new AlertDialog.Builder(this)
-                .setTitle("Kết quả")
-                .setMessage(result)
-                .setPositiveButton("OK", (dialog, which) -> {})
-                .show();
+        // Inflate layout cho dialog
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_result);
+
+        // Ánh xạ các view trong layout
+        TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);
+        TextView tvResultMessage = dialog.findViewById(R.id.tvResultMessage);
+        TextView tvMoneyChange = dialog.findViewById(R.id.tvMoneyChange);
+        Button btnCloseDialog = dialog.findViewById(R.id.btnCloseDialog);
+
+        // Hiển thị thông tin kết quả
+        tvResultMessage.setText(result);
+
+        // Lấy số tiền thay đổi từ ViewModel
+        int moneyChange = viewModel.getMoneyChange().getValue();
+
+        if (moneyChange > 0) {
+            tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        } else if (moneyChange < 0) {
+            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            tvMoneyChange.setText("Không có thay đổi về tiền");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        }
+
+        // Đóng dialog khi nhấn nút
+        btnCloseDialog.setOnClickListener(v -> dialog.dismiss());
+
+        // Hiển thị dialog
+        dialog.show();
     }
 
     private void showAddMoneyDialog() {

@@ -20,6 +20,7 @@ public class RaceViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> isRacing = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> needsReset = new MutableLiveData<>(false);
     private final MutableLiveData<String> raceResult = new MutableLiveData<>();
+    private final MutableLiveData<Integer> moneyChange = new MutableLiveData<>(0);
     private final Context context;
 
     public RaceViewModel(@NonNull Application application) {
@@ -52,6 +53,14 @@ public class RaceViewModel extends AndroidViewModel {
     public void setCurrentBets(List<HorseBet> bets) {
         repository.setCurrentBets(bets);
         updateBalanceAndBet();
+    }
+
+    public LiveData<Integer> getMoneyChange() {
+        return moneyChange;
+    }
+
+    public void setMoneyChange(int change) {
+        moneyChange.setValue(change);
     }
 
     public List<HorseBet> getCurrentBets() {
@@ -117,23 +126,22 @@ public class RaceViewModel extends AndroidViewModel {
     private void calculateAndUpdateResults(int winningHorse) {
         int totalWinnings = 0;
         StringBuilder resultMessage = new StringBuilder();
-
         for (HorseBet bet : repository.getCurrentBets()) {
             if (bet.getHorseNumber() == winningHorse) {
-                int winAmount = bet.getBetAmount() * 2;
+                int winAmount = bet.getBetAmount() * 2; // Ví dụ: Nhân đôi số tiền nếu thắng
                 totalWinnings += winAmount;
                 resultMessage.append("Ngựa ").append(bet.getHorseNumber())
                         .append(" về nhất! +").append(winAmount).append("đ\n");
             } else {
+                totalWinnings -= bet.getBetAmount(); // Trừ tiền nếu thua
                 resultMessage.append("Ngựa ").append(bet.getHorseNumber())
                         .append(" thua\n");
             }
         }
-
         repository.updateBalance(totalWinnings);
+        setMoneyChange(totalWinnings); // Cập nhật tiền thay đổi
         resultMessage.append("\nTổng cộng: ").append(totalWinnings > 0 ? "+" : "")
-                .append(totalWinnings - repository.getTotalBetAmount()).append("đ");
-
+                .append(totalWinnings).append("đ");
         raceResult.setValue(resultMessage.toString());
         updateBalanceAndBet();
     }
