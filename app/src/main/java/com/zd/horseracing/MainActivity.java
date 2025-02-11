@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChooseHorse;
     private Button btnStart;
     private Button btnReset;
+    private Button btnAddMoney;
     private SeekBar seekBar1;
     private SeekBar seekBar2;
     private SeekBar seekBar3;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnChooseHorse = findViewById(R.id.btnChooseHorse);
         btnStart = findViewById(R.id.btnStart);
         btnReset = findViewById(R.id.btnReset);
+        btnAddMoney = findViewById(R.id.btnAddMoney);
         seekBar1 = findViewById(R.id.seekBar1);
         seekBar2 = findViewById(R.id.seekBar2);
         seekBar3 = findViewById(R.id.seekBar3);
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             resetSeekBars();
             viewModel.resetRace();
         });
+        btnAddMoney.setOnClickListener(v -> showAddMoneyDialog());
     }
 
     private void observeViewModel() {
@@ -203,11 +206,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showResultDialog(String result) {
-        new AlertDialog.Builder(this)
-                .setTitle("Kết quả")
-                .setMessage(result)
-                .setPositiveButton("OK", (dialog, which) -> {})
-                .show();
+        // Inflate layout cho dialog
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_result);
+
+        // Ánh xạ các view trong layout
+        TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);
+        TextView tvResultMessage = dialog.findViewById(R.id.tvResultMessage);
+        TextView tvMoneyChange = dialog.findViewById(R.id.tvMoneyChange);
+        Button btnCloseDialog = dialog.findViewById(R.id.btnCloseDialog);
+
+        // Hiển thị thông tin kết quả
+        tvResultMessage.setText(result);
+
+        // Lấy số tiền thay đổi từ ViewModel
+        int moneyChange = viewModel.getMoneyChange().getValue();
+
+        if (moneyChange > 0) {
+            tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        } else if (moneyChange < 0) {
+            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            tvMoneyChange.setText("Không có thay đổi về tiền");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        }
+
+        // Đóng dialog khi nhấn nút
+        btnCloseDialog.setOnClickListener(v -> dialog.dismiss());
+
+        // Hiển thị dialog
+        dialog.show();
+    }
+
+    private void showAddMoneyDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_add_money);
+
+        EditText etAddMoney = dialog.findViewById(R.id.etAddMoney);
+        Button btnConfirmAddMoney = dialog.findViewById(R.id.btnConfirmAddMoney);
+
+        btnConfirmAddMoney.setOnClickListener(v -> {
+            String moneyStr = etAddMoney.getText().toString();
+            if (moneyStr.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập số tiền", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                int amountToAdd = Integer.parseInt(moneyStr);
+                if (amountToAdd <= 0) {
+                    Toast.makeText(this, "Số tiền phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Cập nhật số dư trong ViewModel
+                viewModel.updateBalance(amountToAdd);
+                Toast.makeText(this, "Nạp tiền thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Số tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override
