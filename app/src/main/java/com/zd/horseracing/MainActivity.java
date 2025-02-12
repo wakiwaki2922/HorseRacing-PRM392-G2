@@ -1,18 +1,22 @@
 package com.zd.horseracing;
 
 import android.app.Dialog;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.zd.horseracing.Models.HorseBet;
@@ -171,6 +175,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRace() {
+        // Lấy tham chiếu đến SeekBar
+        SeekBar seekBar = findViewById(R.id.seekBar1);
+
+        // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse_animation);
+        seekBar.setThumb(drawable);
+
+        // Ép kiểu Drawable thành AnimationDrawable
+        final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar.getThumb();
+
+        // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
+        seekBar.post(new Runnable() {
+            @Override
+            public void run() {
+                horseAnimation.start();
+            }
+        });
+
         viewModel.startRace();
 
         handler.post(new Runnable() {
