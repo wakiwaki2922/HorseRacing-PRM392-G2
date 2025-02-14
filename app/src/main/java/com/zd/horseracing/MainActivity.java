@@ -174,63 +174,68 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRace() {
 
-        if (viewModel.startRace()) {
-            // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse1_animation);
-            Drawable drawable2 = ContextCompat.getDrawable(this, R.drawable.horse2_animation);
-            Drawable drawable3 = ContextCompat.getDrawable(this, R.drawable.horse3_animation);
-            Drawable drawable4 = ContextCompat.getDrawable(this, R.drawable.horse4_animation);
-            seekBar1.setThumb(drawable);
-            seekBar2.setThumb(drawable2);
-            seekBar3.setThumb(drawable3);
-            seekBar4.setThumb(drawable4);
+        if (!viewModel.startRace()) {
+            return;
+        }
+        // Array of drawable resources for horse animations
+        int[] horseDrawableRes = {
+                R.drawable.horse1_animation,
+                R.drawable.horse2_animation,
+                R.drawable.horse3_animation,
+                R.drawable.horse4_animation
+        };
 
-            // Ép kiểu Drawable thành AnimationDrawable
-            final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar1.getThumb();
-            final AnimationDrawable horseAnimation2 = (AnimationDrawable) seekBar2.getThumb();
-            final AnimationDrawable horseAnimation3 = (AnimationDrawable) seekBar3.getThumb();
-            final AnimationDrawable horseAnimation4 = (AnimationDrawable) seekBar4.getThumb();
+        // Array of SeekBars corresponding to each horse
+        SeekBar[] seekBars = { seekBar1, seekBar2, seekBar3, seekBar4 };
 
-            // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
-            seekBar1.post(horseAnimation::start);
-            seekBar2.post(horseAnimation2::start);
-            seekBar3.post(horseAnimation3::start);
-            seekBar4.post(horseAnimation4::start);
+        // Array to store AnimationDrawable instances
+        final AnimationDrawable[] horseAnimations = new AnimationDrawable[seekBars.length];
 
-            // Lưu các AnimationDrawable vào mảng để tiện dừng khi cần
-            final AnimationDrawable[] horseAnimations = new AnimationDrawable[]{
-                    horseAnimation, horseAnimation2, horseAnimation3, horseAnimation4
-            };
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (!viewModel.getIsRacing().getValue()) return;
+        // Initialize each SeekBar with its corresponding animation drawable
+        for (int i = 0; i < seekBars.length; i++) {
+            Drawable drawable = ContextCompat.getDrawable(this, horseDrawableRes[i]);
+            if (drawable == null) {
+                // Handle null drawable if necessary
+                continue;
+            }
+            seekBars[i].setThumb(drawable);
+            AnimationDrawable animation = (AnimationDrawable) seekBars[i].getThumb();
+            horseAnimations[i] = animation;
+            // Post the start to ensure drawable is ready
+            seekBars[i].post(animation::start);
+        }
 
-                    boolean hasWinner = false;
-                    SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
+        // Create a single Random instance for performance
+        final Random random = new Random();
 
-                    for (int i = 0; i < seekBars.length; i++) {
-                        int progress = seekBars[i].getProgress() + new Random().nextInt(3);
-                        seekBars[i].setProgress(progress);
-                        if (progress >= 100) {
-                            hasWinner = true;
-                            // Dừng animation cho tất cả các con ngựa
-                            for (AnimationDrawable anim : horseAnimations) {
-                                if (anim.isRunning()) {
-                                    anim.stop();
-                                }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (!viewModel.getIsRacing().getValue()) return;
+
+                boolean hasWinner = false;
+
+                for (int i = 0; i < seekBars.length; i++) {
+                    int progress = seekBars[i].getProgress() + random.nextInt(3);
+                    seekBars[i].setProgress(progress);
+                    if (progress >= 100) {
+                        hasWinner = true;
+                        // Dừng animation cho tất cả các con ngựa
+                        for (AnimationDrawable anim : horseAnimations) {
+                            if (anim.isRunning()) {
+                                anim.stop();
                             }
-                            viewModel.handleRaceFinished(i + 1);
-                            break;
                         }
-                    }
-
-                    if (!hasWinner) {
-                        handler.postDelayed(this, 50);
+                        viewModel.handleRaceFinished(i + 1);
+                        break;
                     }
                 }
-            });
-        }
+
+                if (!hasWinner) {
+                    handler.postDelayed(this, 50);
+                }
+            }
+        });
     }
 
     private void resetSeekBars() {
