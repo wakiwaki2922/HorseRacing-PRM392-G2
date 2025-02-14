@@ -1,6 +1,7 @@
 package com.zd.horseracing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
@@ -19,6 +20,10 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private Button btnLogin;
     private TextView btnDontHaveAccount;
+    private SharedPreferences sharedPreferences;
+
+    private static final String DEFAULT_EMAIL = "user@gmail.com";
+    private static final String DEFAULT_PASSWORD = "123456";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnDontHaveAccount = findViewById(R.id.btnDontHaveAccount);
 
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
         String password = intent.getStringExtra("password");
 
-        etEmail.setText(email);
-        etPassword.setText(password);
+        if (email != null && password != null) {
+            etEmail.setText(email);
+            etPassword.setText(password);
+        }
 
         togglePassword.setOnClickListener(view -> {
             isPasswordVisible = !isPasswordVisible;
@@ -54,10 +63,14 @@ public class LoginActivity extends AppCompatActivity {
             String passwordInput = etPassword.getText().toString().trim();
 
             if (validateInput(emailInput, passwordInput)) {
-                // Chuyển sang màn hình chính nếu thông tin hợp lệ
-                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intentMain);
-                finish(); // Đóng LoginActivity
+                if (checkAccount(emailInput, passwordInput)) {
+                    Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("email", emailInput);
+                    startActivity(intentMain);
+                    finish();
+                } else {
+                    Toast.makeText(this, "Tài khoản không tồn tại. Vui lòng đăng ký!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -96,5 +109,13 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private boolean checkAccount(String email, String password) {
+        String savedEmail = sharedPreferences.getString("email", null);
+        String savedPassword = sharedPreferences.getString("password", null);
+
+        return (email.equals(DEFAULT_EMAIL) && password.equals(DEFAULT_PASSWORD)) ||
+                (email.equals(savedEmail) && password.equals(savedPassword));
     }
 }
