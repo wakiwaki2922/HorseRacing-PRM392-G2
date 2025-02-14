@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
         Window window = dialog.getWindow();
         if (window != null) {
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
             window.setGravity(Gravity.CENTER);
             // Set orientation to landscape
             window.getAttributes().screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
@@ -250,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
         int moneyChange = viewModel.getMoneyChange().getValue();
 
         if (moneyChange > 0) {
-            tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+            tvMoneyChange.setText("Bạn đã thắng " + moneyChange + "đ");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_blue_bright));
             //play sound effect
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
             mediaPlayer.setOnCompletionListener(mp -> {
@@ -260,8 +260,8 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.start();
         } else if (moneyChange < 0) {
             imageView.setImageResource(R.drawable.lose);
-            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "đ");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_light));
             //play sound effect
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundlose);
             mediaPlayer.setOnCompletionListener(mp -> {
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.start();
         } else {
             tvMoneyChange.setText("Không có thay đổi về tiền");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_blue_bright));
             //play sound effect
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
             mediaPlayer.setOnCompletionListener(mp -> {

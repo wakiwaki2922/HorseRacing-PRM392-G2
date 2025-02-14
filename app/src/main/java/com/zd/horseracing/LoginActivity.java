@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        togglePassword = findViewById(R.id.ivTogglePassword);
+        togglePassword = findViewById(R.id.ivTogglePassword); // 🔹 FIX: Thêm ánh xạ ImageView
         btnLogin = findViewById(R.id.btnLogin);
         btnDontHaveAccount = findViewById(R.id.btnDontHaveAccount);
 
@@ -74,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void togglePasswordVisibility(EditText editText, ImageView toggleIcon, boolean isVisible) {
         if (isVisible) {
             editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -86,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         editText.setSelection(editText.getText().length());
     }
+
+
 
     private boolean validateInput(String email, String password) {
         Set<String> savedEmails = sharedPreferences.getStringSet("emails", new HashSet<>());
