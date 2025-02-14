@@ -1,4 +1,5 @@
 package com.zd.horseracing;
+import android.media.MediaPlayer;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.Gravity;
@@ -239,12 +240,30 @@ public class MainActivity extends AppCompatActivity {
         if (moneyChange > 0) {
             tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         } else if (moneyChange < 0) {
             tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundlose);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         } else {
             tvMoneyChange.setText("Không có thay đổi về tiền");
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         }
 
         // Đóng dialog khi nhấn nút
