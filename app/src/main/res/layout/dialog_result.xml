@@ -3,10 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/bg_result"
-
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg"
     >
 
     <!-- Image on Top -->
@@ -21,8 +19,8 @@
 
     <ImageView
         android:id="@+id/ivTopImage"
-        android:layout_width="204dp"
-        android:layout_height="158dp"
+        android:layout_width="109dp"
+        android:layout_height="77dp"
         android:scaleType="centerCrop"
         android:src="@drawable/win"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,50 +30,48 @@
 
     <TextView
         android:id="@+id/tvDialogTitle"
-        android:layout_width="136dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Kết Quả"
-        android:textColor="#F00B0B"
+        android:textColor="#040000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivTopImage" />
 
     <TextView
         android:id="@+id/tvResultMessage"
-        android:layout_width="693dp"
-        android:layout_height="49dp"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Ngựa số X đã chiến thắng!"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textColor="#FCFFFD"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogTitle" />
 
     <TextView
         android:id="@+id/tvMoneyChange"
-        android:layout_width="693dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Bạn đã thắng + $500"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textColor="#27D700"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvResultMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/tvResultMessage" />
 
     <Button
         android:id="@+id/btnCloseDialog"
-        android:layout_width="160dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="107dp"
+        android:layout_height="47dp"
         android:backgroundTint="@android:color/holo_orange_light"
         android:paddingHorizontal="24dp"
         android:paddingVertical="8dp"
@@ -84,9 +80,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMoneyChange"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMoneyChange" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
