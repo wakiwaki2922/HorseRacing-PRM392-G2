@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private ImageView togglePassword;
@@ -39,13 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         Intent intent = getIntent();
-        String email = intent.getStringExtra("email");
-        String password = intent.getStringExtra("password");
 
-        if (email != null && password != null) {
-            etEmail.setText(email);
-            etPassword.setText(password);
-        }
+
+
 
         togglePassword.setOnClickListener(view -> {
             isPasswordVisible = !isPasswordVisible;
@@ -69,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intentMain);
                     finish();
                 } else {
-                    Toast.makeText(this, "Tài khoản không tồn tại. Vui lòng đăng ký!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Mật khẩu hoặc tài khoản bị sai!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validateInput(String email, String password) {
+        Set<String> savedEmails = sharedPreferences.getStringSet("emails", new HashSet<>());
+
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return false;
@@ -100,7 +101,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password.length() < 6) {
-            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mật khẩu hoặc tài khoản bị sai!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!savedEmails.contains(email) && !email.equals(DEFAULT_EMAIL)) {
+            Toast.makeText(this, "Tài khoản không tồn tại!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -108,10 +114,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean checkAccount(String email, String password) {
-        String savedEmail = sharedPreferences.getString("email", null);
-        String savedPassword = sharedPreferences.getString("password", null);
+        Set<String> savedEmails = sharedPreferences.getStringSet("emails", new HashSet<>());
 
+        // Kiểm tra nếu email có trong danh sách và mật khẩu đúng
         return (email.equals(DEFAULT_EMAIL) && password.equals(DEFAULT_PASSWORD)) ||
-                (email.equals(savedEmail) && password.equals(savedPassword));
+                (savedEmails.contains(email) && password.equals(sharedPreferences.getString(email + "_password", "")));
     }
 }

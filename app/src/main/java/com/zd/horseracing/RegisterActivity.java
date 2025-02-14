@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,12 +13,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText etEmail, etPassword, etConfirmPassword;
     private ImageView togglePassword;
     private boolean isPasswordVisible = false;
     private Button btnRegister;
     private SharedPreferences sharedPreferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +52,24 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            if (isAccountExists(email)) {
+                Toast.makeText(RegisterActivity.this, "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             saveAccount(email, password);
 
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            intent.putExtra("email", email);
-            intent.putExtra("password", password);
-            startActivity(intent);
-            finish();
+            // Hiển thị thông báo đăng ký thành công
+            Toast.makeText(RegisterActivity.this, "Đăng ký thành công! Đang chuyển đến trang đăng nhập...", Toast.LENGTH_SHORT).show();
+
+            // Trì hoãn chuyển màn hình 1 giây để Toast hiển thị đủ lâu
+            new android.os.Handler().postDelayed(() -> {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.putExtra("email", email);
+                intent.putExtra("password", password);
+                startActivity(intent);
+                finish();
+            }, 1000); // 1000ms = 1 giây
         });
     }
 
@@ -95,8 +112,31 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void saveAccount(String email, String password) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", email);
-        editor.putString("password", password);
+
+        // Lấy danh sách email đã lưu
+        Set<String> savedEmails = sharedPreferences.getStringSet("emails", new HashSet<>());
+
+        // Thêm email mới vào danh sách
+        savedEmails.add(email);
+
+        // Lưu danh sách email mới
+        editor.putStringSet("emails", savedEmails);
+
+        // Lưu mật khẩu cho từng email riêng biệt
+        editor.putString(email + "_password", password);
+
         editor.apply();
     }
+
+
+
+    private boolean isAccountExists(String email) {
+        Set<String> savedEmails = sharedPreferences.getStringSet("emails", new HashSet<>());
+
+        return savedEmails.contains(email);
+    }
+
+
+
+
 }
