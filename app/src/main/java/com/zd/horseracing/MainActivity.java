@@ -234,10 +234,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetSeekBars() {
-        seekBar1.setProgress(0);
-        seekBar2.setProgress(0);
-        seekBar3.setProgress(0);
-        seekBar4.setProgress(0);
+        resetSeekBar(seekBar1, R.drawable.assasin1);
+        resetSeekBar(seekBar2, R.drawable.knight_walk_1);
+        resetSeekBar(seekBar3, R.drawable.ice_horse);
+        resetSeekBar(seekBar4, R.drawable.horse_bend_01);
+    }
+
+    private void resetSeekBar(SeekBar seekBar, int drawableRes) {
+        // Reset tiến độ của SeekBar
+        seekBar.setProgress(0);
+        Drawable thumbDrawable = ContextCompat.getDrawable(this, drawableRes);
+        seekBar.setThumb(thumbDrawable);
     }
 
     private void showResultDialog(String result) {
