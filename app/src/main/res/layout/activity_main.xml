@@ -12,57 +12,68 @@
         android:layout_height="wrap_content">
 
         <!-- Main background layout -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_weight="3"
-            android:orientation="horizontal">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <!-- Image section -->
+            <!-- Dãy hình ảnh -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:layout_margin="0dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/landscape" />
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:layout_margin="0dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/landscape" />
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:layout_margin="0dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/landscape" />
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:layout_margin="0dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/landscape" />
 
-                <TextView
-                    android:id="@+id/textView"
+                <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xin chào người chơi"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"
+                android:padding="8dp"
+                android:layout_gravity="start"/>
+            <TextView
+                android:id="@+id/guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hướng dẫn"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_red_dark"
+                android:padding="8dp"
+                android:layout_gravity="center"/>
+            <!-- TextView nằm trên cùng -->
 
-        </LinearLayout>
+        </FrameLayout>
+
 
         <!-- Bet and Balance on the top right corner -->
         <LinearLayout

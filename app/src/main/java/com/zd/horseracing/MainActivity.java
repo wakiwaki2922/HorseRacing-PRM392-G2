@@ -1,4 +1,5 @@
 package com.zd.horseracing;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,15 +53,35 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(RaceViewModel.class);
         handler = new Handler(Looper.getMainLooper());
+        TextView textView = findViewById(R.id.guide);
+        textView.setOnClickListener(view -> showGuideDialog());
 
         bgMusic = MediaPlayer.create(this, R.raw.pokemonloop);
         bgMusic.setLooping(true);
         bgMusic.start();
+        TextView welcomeText = findViewById(R.id.welcomeText);
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
+        if (email != null && !email.isEmpty()) {
+            welcomeText.setText("Xin chào, " + email); // Hiển thị email
+        }
+
 
         initViews();
         setupListeners();
         observeViewModel();
     }
+    private void showGuideDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Hướng Dẫn Chơi")
+                .setMessage("Đây là hướng dẫn chơi game...\n1. Chọn một hoặc nhiều con ngựa để đặt cược.\n2. Nhập số tiền cược cho từng con ngựa bạn chọn.\n3. Nhấn 'Bắt đầu đua' để xem kết quả.\n4. Nếu ngựa bạn đặt cược thắng, bạn sẽ nhận được tiền thưởng tương ứng!")
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 
     private void initViews() {
         tvBalance = findViewById(R.id.tvBalance);
