@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             // Chuyển dữ liệu sang LoginActivity
-            Intent intent = new Intent(RegisterActivity .this, LoginActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             intent.putExtra("email", email);
             intent.putExtra("password", password);
             startActivity(intent);

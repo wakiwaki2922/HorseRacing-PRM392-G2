@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -230,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tvResultMessage = dialog.findViewById(R.id.tvResultMessage);
         TextView tvMoneyChange = dialog.findViewById(R.id.tvMoneyChange);
         Button btnCloseDialog = dialog.findViewById(R.id.btnCloseDialog);
+        ImageView imageView = dialog.findViewById(R.id.ivTopImage);
 
         // Hiển thị thông tin kết quả
         tvResultMessage.setText(result);
@@ -247,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
             });
             mediaPlayer.start();
         } else if (moneyChange < 0) {
+            imageView.setImageResource(R.drawable.lose);
             tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             //play sound effect
