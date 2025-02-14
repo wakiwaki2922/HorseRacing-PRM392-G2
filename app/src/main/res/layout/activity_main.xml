@@ -353,7 +353,7 @@
                 android:max="100"
                 android:progress="0"
                 android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/horse2" />
+                android:thumb="@drawable/knight_walk_1" />
         </LinearLayout>
         <!-- Track 3 -->
         <LinearLayout
@@ -381,7 +381,7 @@
                 android:max="100"
                 android:progress="0"
                 android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/horse3" />
+                android:thumb="@drawable/ice_horse" />
         </LinearLayout>
         <!-- Track 4 -->
         <LinearLayout

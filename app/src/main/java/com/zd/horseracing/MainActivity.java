@@ -177,15 +177,24 @@ public class MainActivity extends AppCompatActivity {
         if (viewModel.startRace()) {
             // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
             Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse1_animation);
+            Drawable drawable2 = ContextCompat.getDrawable(this, R.drawable.horse2_animation);
+            Drawable drawable3 = ContextCompat.getDrawable(this, R.drawable.horse3_animation);
             seekBar1.setThumb(drawable);
+            seekBar2.setThumb(drawable2);
+            seekBar3.setThumb(drawable3);
 
             // Ép kiểu Drawable thành AnimationDrawable
             final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar1.getThumb();
+            final AnimationDrawable horseAnimation2 = (AnimationDrawable) seekBar2.getThumb();
+            final AnimationDrawable horseAnimation3 = (AnimationDrawable) seekBar3.getThumb();
 
             // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
             seekBar1.post(horseAnimation::start);
+            seekBar2.post(horseAnimation2::start);
+            seekBar3.post(horseAnimation3::start);
 
-
+            // Lưu các AnimationDrawable vào mảng để tiện dừng khi cần
+            final AnimationDrawable[] horseAnimations = new AnimationDrawable[]{horseAnimation, horseAnimation2, horseAnimation3};
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -199,8 +208,11 @@ public class MainActivity extends AppCompatActivity {
                         seekBars[i].setProgress(progress);
                         if (progress >= 100) {
                             hasWinner = true;
-                            if (horseAnimation.isRunning()){
-                                horseAnimation.stop();
+                            // Dừng animation cho tất cả các con ngựa
+                            for (AnimationDrawable anim : horseAnimations) {
+                                if (anim.isRunning()) {
+                                    anim.stop();
+                                }
                             }
                             viewModel.handleRaceFinished(i + 1);
                             break;
