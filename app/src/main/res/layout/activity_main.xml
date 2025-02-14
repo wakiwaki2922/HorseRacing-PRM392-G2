@@ -320,12 +320,12 @@
             <SeekBar
                 android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:max="100"
                 android:progress="0"
                 android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/horse" />
+                android:thumb="@drawable/assasin1" />
         </LinearLayout>
         <!-- Track 2 -->
         <LinearLayout

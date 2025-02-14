@@ -9,12 +9,10 @@ import android.os.Looper;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -176,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRace() {
 
-        if (viewModel.startRace()){
+        if (viewModel.startRace()) {
             // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse_animation);
+            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse1_animation);
             seekBar1.setThumb(drawable);
 
             // Ép kiểu Drawable thành AnimationDrawable
@@ -186,31 +184,35 @@ public class MainActivity extends AppCompatActivity {
 
             // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
             seekBar1.post(horseAnimation::start);
-        }
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (!viewModel.getIsRacing().getValue()) return;
 
-                boolean hasWinner = false;
-                SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (!viewModel.getIsRacing().getValue()) return;
 
-                for (int i = 0; i < seekBars.length; i++) {
-                    int progress = seekBars[i].getProgress() + new Random().nextInt(3);
-                    seekBars[i].setProgress(progress);
-                    if (progress >= 100) {
-                        hasWinner = true;
-                        viewModel.handleRaceFinished(i + 1);
-                        break;
+                    boolean hasWinner = false;
+                    SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
+
+                    for (int i = 0; i < seekBars.length; i++) {
+                        int progress = seekBars[i].getProgress() + new Random().nextInt(3);
+                        seekBars[i].setProgress(progress);
+                        if (progress >= 100) {
+                            hasWinner = true;
+                            if (horseAnimation.isRunning()){
+                                horseAnimation.stop();
+                            }
+                            viewModel.handleRaceFinished(i + 1);
+                            break;
+                        }
+                    }
+
+                    if (!hasWinner) {
+                        handler.postDelayed(this, 50);
                     }
                 }
-
-                if (!hasWinner) {
-                    handler.postDelayed(this, 50);
-                }
-            }
-        });
+            });
+        }
     }
 
     private void resetSeekBars() {
