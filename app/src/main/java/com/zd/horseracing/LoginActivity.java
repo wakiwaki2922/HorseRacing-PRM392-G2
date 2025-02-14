@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         togglePassword = findViewById(R.id.ivTogglePassword); // 🔹 FIX: Thêm ánh xạ ImageView
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnDontHaveAccount = findViewById(R.id.btnDontHaveAccount);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
@@ -38,14 +42,26 @@ public class LoginActivity extends AppCompatActivity {
             togglePasswordVisibility(etPassword, togglePassword, isPasswordVisible);
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+        btnDontHaveAccount.setOnClickListener(view -> {
+            Intent intentMain = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intentMain);
+            finish();
+        });
+
+        btnLogin.setOnClickListener(view -> {
+            String emailInput = etEmail.getText().toString().trim();
+            String passwordInput = etPassword.getText().toString().trim();
+
+            if (validateInput(emailInput, passwordInput)) {
+                // Chuyển sang màn hình chính nếu thông tin hợp lệ
+                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intentMain);
+                finish(); // Đóng LoginActivity
             }
         });
     }
+
+
 
     private void togglePasswordVisibility(EditText editText, ImageView toggleIcon, boolean isVisible) {
         if (isVisible) {
@@ -58,5 +74,26 @@ public class LoginActivity extends AppCompatActivity {
             toggleIcon.setImageResource(R.drawable.ic_eye_closed);
         }
         editText.setSelection(editText.getText().length());
+    }
+
+
+
+    private boolean validateInput(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!email.contains("@")) {
+            Toast.makeText(this, "Email không hợp lệ!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.length() < 6) {
+            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }
