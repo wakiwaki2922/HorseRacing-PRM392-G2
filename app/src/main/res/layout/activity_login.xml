@@ -5,14 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/horse_background"
+    android:background="@drawable/horse_bg"
     tools:context=".LoginActivity">
 
-    <!-- Tiêu đề Horse Racing -->
-
-    <!-- Email -->
-
-    <!-- Password -->
 
     <TextView
         android:id="@+id/tvTitle"
@@ -55,7 +50,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="84dp"
         android:background="@android:drawable/edit_text"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:padding="12dp"
         android:textSize="16sp"
@@ -85,13 +80,30 @@
         android:layout_width="307dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:backgroundTint="#FF5722"
-        android:text="Login"
+        android:backgroundTint="#F44336"
+        android:text="Đăng nhập"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/btnDontHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="33dp"
+        android:text="Bạn chưa có tài khoản?"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etPassword"
+        app:layout_constraintVertical_bias="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
