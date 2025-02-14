@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/horse_bg"
+    android:background="@drawable/login_background"
     tools:context=".LoginActivity">
 
 
@@ -16,7 +16,7 @@
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Horse Racing"
-        android:textColor="#F44336"
+        android:textColor="#084030"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/etEmail"
@@ -80,7 +80,7 @@
         android:layout_width="307dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:backgroundTint="#F44336"
+        android:backgroundTint="#084030"
         android:text="Đăng nhập"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -96,7 +96,7 @@
         android:layout_marginTop="68dp"
         android:layout_marginBottom="33dp"
         android:text="Bạn chưa có tài khoản?"
-        android:textColor="#F44336"
+        android:textColor="#BFAA18"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"

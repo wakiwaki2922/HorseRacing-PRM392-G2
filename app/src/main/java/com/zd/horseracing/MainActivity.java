@@ -18,7 +18,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -43,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RaceViewModel viewModel;
     private Handler handler;
+    private MediaPlayer bgMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(RaceViewModel.class);
         handler = new Handler(Looper.getMainLooper());
+
+        bgMusic = MediaPlayer.create(this, R.raw.pokemonloop);
+        bgMusic.setLooping(true);
+        bgMusic.start();
 
         initViews();
         setupListeners();
@@ -216,11 +220,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a single Random instance for performance
         final Random random = new Random();
-
+        MediaPlayer mediaPlayer2 = MediaPlayer.create(this, R.raw.horsefootsteps);
         handler.post(new Runnable() {
             @Override
             public void run() {
                 if (!viewModel.getIsRacing().getValue()) return;
+
+                mediaPlayer2.setLooping(true);
+                mediaPlayer2.start();
 
                 boolean hasWinner = false;
 
@@ -235,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
                                 anim.stop();
                             }
                         }
+                        mediaPlayer2.stop();
                         viewModel.handleRaceFinished(i + 1);
                         break;
                     }
@@ -246,8 +254,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         });
-        mediaPlayer.start();
 
+        mediaPlayer.start();
     }
 
     private void resetSeekBars() {
