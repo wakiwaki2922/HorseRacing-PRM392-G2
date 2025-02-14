@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/horse_background"
-    tools:context=".LoginActivity">
+    android:background="@drawable/horse_bg"
+    tools:context="com.zd.horseracing.LoginActivity">
 
     <!-- Tiêu đề Horse Racing -->
 

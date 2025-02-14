@@ -1,9 +1,11 @@
-package com.example.login;
+package com.zd.horseracing;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private ImageView togglePassword;
     private boolean isPasswordVisible = false;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         togglePassword = findViewById(R.id.ivTogglePassword); // 🔹 FIX: Thêm ánh xạ ImageView
+        btnLogin = (Button) findViewById(R.id.btnLogin);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
@@ -32,6 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         togglePassword.setOnClickListener(view -> {
             isPasswordVisible = !isPasswordVisible;
             togglePasswordVisibility(etPassword, togglePassword, isPasswordVisible);
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
