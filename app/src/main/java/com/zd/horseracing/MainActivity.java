@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private RaceViewModel viewModel;
     private Handler handler;
 
+    private MediaPlayer bgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(RaceViewModel.class);
         handler = new Handler(Looper.getMainLooper());
+
+        bgMusic = MediaPlayer.create(this, R.raw.pokemonloop);
+        bgMusic.setLooping(true);
+        bgMusic.start();
 
         initViews();
         setupListeners();
