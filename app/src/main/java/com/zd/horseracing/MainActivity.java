@@ -175,25 +175,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRace() {
-        // Lấy tham chiếu đến SeekBar
-        SeekBar seekBar = findViewById(R.id.seekBar1);
 
-        // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
-        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse_animation);
-        seekBar.setThumb(drawable);
+        if (viewModel.startRace()){
+            // Sử dụng ContextCompat để lấy Drawable (tương thích với các phiên bản Android mới)
+            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse_animation);
+            seekBar1.setThumb(drawable);
 
-        // Ép kiểu Drawable thành AnimationDrawable
-        final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar.getThumb();
+            // Ép kiểu Drawable thành AnimationDrawable
+            final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar1.getThumb();
 
-        // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
-        seekBar.post(new Runnable() {
-            @Override
-            public void run() {
-                horseAnimation.start();
-            }
-        });
-
-        viewModel.startRace();
+            // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
+            seekBar1.post(horseAnimation::start);
+        }
 
         handler.post(new Runnable() {
             @Override
