@@ -1,18 +1,24 @@
 package com.zd.horseracing;
-
+import android.media.MediaPlayer;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.Gravity;
 import android.app.Dialog;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -177,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
         if (!viewModel.startRace()) {
             return;
         }
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.countdownfinalcut);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            mp.release();
         // Array of drawable resources for horse animations
         int[] horseDrawableRes = {
                 R.drawable.horse1_animation,
@@ -231,11 +240,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                if (!hasWinner) {
-                    handler.postDelayed(this, 50);
+                    if (!hasWinner) {
+                        handler.postDelayed(this, 50);
+                    }
                 }
-            }
+            });
         });
+        mediaPlayer.start();
+
     }
 
     private void resetSeekBars() {
@@ -257,11 +269,20 @@ public class MainActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_result);
 
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setGravity(Gravity.CENTER);
+            // Set orientation to landscape
+            window.getAttributes().screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        }
+
         // Ánh xạ các view trong layout
         TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);
         TextView tvResultMessage = dialog.findViewById(R.id.tvResultMessage);
         TextView tvMoneyChange = dialog.findViewById(R.id.tvMoneyChange);
         Button btnCloseDialog = dialog.findViewById(R.id.btnCloseDialog);
+        ImageView imageView = dialog.findViewById(R.id.ivTopImage);
 
         // Hiển thị thông tin kết quả
         tvResultMessage.setText(result);
@@ -270,14 +291,33 @@ public class MainActivity extends AppCompatActivity {
         int moneyChange = viewModel.getMoneyChange().getValue();
 
         if (moneyChange > 0) {
-            tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+            tvMoneyChange.setText("Bạn đã thắng " + moneyChange + "đ");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_blue_bright));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         } else if (moneyChange < 0) {
-            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            imageView.setImageResource(R.drawable.lose);
+            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "đ");
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundlose);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         } else {
             tvMoneyChange.setText("Không có thay đổi về tiền");
-            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_blue_bright));
+            //play sound effect
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+            });
+            mediaPlayer.start();
         }
 
         // Đóng dialog khi nhấn nút
