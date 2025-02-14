@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView togglePassword;
     private boolean isPasswordVisible = false;
     private Button btnLogin;
+    private TextView btnDontHaveAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

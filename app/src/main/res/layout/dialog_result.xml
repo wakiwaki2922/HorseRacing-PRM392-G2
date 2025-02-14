@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/bg_result"
+
     >
 
     <!-- Image on Top -->
@@ -31,12 +32,12 @@
 
     <TextView
         android:id="@+id/tvDialogTitle"
-        android:layout_width="693dp"
-        android:layout_height="56dp"
+        android:layout_width="136dp"
+        android:layout_height="36dp"
         android:gravity="center"
         android:text="Kết Quả"
-        android:textColor="@android:color/black"
-        android:textSize="40sp"
+        android:textColor="#F00B0B"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -47,14 +48,12 @@
         android:id="@+id/tvResultMessage"
         android:layout_width="693dp"
         android:layout_height="49dp"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Ngựa số X đã chiến thắng!"
-        android:textColor="@android:color/holo_blue_bright"
-        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDialogTitle" />
 
@@ -62,11 +61,12 @@
         android:id="@+id/tvMoneyChange"
         android:layout_width="693dp"
         android:layout_height="35dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Bạn đã thắng +500$"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="18sp"
+        android:text="Bạn đã thắng + $500"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvResultMessage" />

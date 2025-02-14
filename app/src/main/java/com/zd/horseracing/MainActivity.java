@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         int moneyChange = viewModel.getMoneyChange().getValue();
 
         if (moneyChange > 0) {
-            tvMoneyChange.setText("Bạn đã thắng +" + moneyChange + "$");
+            tvMoneyChange.setText("Bạn đã thắng + $" + moneyChange);
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
             //play sound effect
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundwin);
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.start();
         } else if (moneyChange < 0) {
             imageView.setImageResource(R.drawable.lose);
-            tvMoneyChange.setText("Bạn đã thua " + moneyChange + "$");
+            tvMoneyChange.setText("Bạn đã thua - $" + moneyChange);
             tvMoneyChange.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             //play sound effect
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.soundlose);
