@@ -180,30 +180,35 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRace() {
         viewModel.startRace();
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.countdownfinalcut);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            mp.release();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (!viewModel.getIsRacing().getValue()) return;
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (!viewModel.getIsRacing().getValue()) return;
+                    boolean hasWinner = false;
+                    SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
 
-                boolean hasWinner = false;
-                SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
+                    for (int i = 0; i < seekBars.length; i++) {
+                        int progress = seekBars[i].getProgress() + new Random().nextInt(3);
+                        seekBars[i].setProgress(progress);
+                        if (progress >= 100) {
+                            hasWinner = true;
+                            viewModel.handleRaceFinished(i + 1);
+                            break;
+                        }
+                    }
 
-                for (int i = 0; i < seekBars.length; i++) {
-                    int progress = seekBars[i].getProgress() + new Random().nextInt(3);
-                    seekBars[i].setProgress(progress);
-                    if (progress >= 100) {
-                        hasWinner = true;
-                        viewModel.handleRaceFinished(i + 1);
-                        break;
+                    if (!hasWinner) {
+                        handler.postDelayed(this, 50);
                     }
                 }
-
-                if (!hasWinner) {
-                    handler.postDelayed(this, 50);
-                }
-            }
+            });
         });
+        mediaPlayer.start();
+
     }
 
     private void resetSeekBars() {
