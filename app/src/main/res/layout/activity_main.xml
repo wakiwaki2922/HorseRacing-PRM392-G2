@@ -409,7 +409,7 @@
                 android:max="100"
                 android:progress="0"
                 android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/horse4" />
+                android:thumb="@drawable/horse_bend_01" />
         </LinearLayout>
         <!-- fence-->
         <LinearLayout

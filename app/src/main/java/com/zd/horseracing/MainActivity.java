@@ -179,22 +179,28 @@ public class MainActivity extends AppCompatActivity {
             Drawable drawable = ContextCompat.getDrawable(this, R.drawable.horse1_animation);
             Drawable drawable2 = ContextCompat.getDrawable(this, R.drawable.horse2_animation);
             Drawable drawable3 = ContextCompat.getDrawable(this, R.drawable.horse3_animation);
+            Drawable drawable4 = ContextCompat.getDrawable(this, R.drawable.horse4_animation);
             seekBar1.setThumb(drawable);
             seekBar2.setThumb(drawable2);
             seekBar3.setThumb(drawable3);
+            seekBar4.setThumb(drawable4);
 
             // Ép kiểu Drawable thành AnimationDrawable
             final AnimationDrawable horseAnimation = (AnimationDrawable) seekBar1.getThumb();
             final AnimationDrawable horseAnimation2 = (AnimationDrawable) seekBar2.getThumb();
             final AnimationDrawable horseAnimation3 = (AnimationDrawable) seekBar3.getThumb();
+            final AnimationDrawable horseAnimation4 = (AnimationDrawable) seekBar4.getThumb();
 
             // Đảm bảo rằng drawable đã được khởi tạo xong rồi mới start animation
             seekBar1.post(horseAnimation::start);
             seekBar2.post(horseAnimation2::start);
             seekBar3.post(horseAnimation3::start);
+            seekBar4.post(horseAnimation4::start);
 
             // Lưu các AnimationDrawable vào mảng để tiện dừng khi cần
-            final AnimationDrawable[] horseAnimations = new AnimationDrawable[]{horseAnimation, horseAnimation2, horseAnimation3};
+            final AnimationDrawable[] horseAnimations = new AnimationDrawable[]{
+                    horseAnimation, horseAnimation2, horseAnimation3, horseAnimation4
+            };
             handler.post(new Runnable() {
                 @Override
                 public void run() {
