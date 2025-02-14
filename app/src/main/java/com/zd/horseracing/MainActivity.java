@@ -1,5 +1,7 @@
 package com.zd.horseracing;
-
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.Gravity;
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -213,6 +215,14 @@ public class MainActivity extends AppCompatActivity {
         // Inflate layout cho dialog
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_result);
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setGravity(Gravity.CENTER);
+            // Set orientation to landscape
+            window.getAttributes().screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        }
 
         // Ánh xạ các view trong layout
         TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);

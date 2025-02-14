@@ -4,62 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/winning"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
-    <!-- Tiêu đề -->
+    <!-- Image on Top -->
+    <ImageView
+        android:id="@+id/ivTopImage"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/win"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- First Text View -->
     <TextView
         android:id="@+id/tvDialogTitle"
-        android:layout_width="0dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Kết Quả Đua Ngựa"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/ivTopImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
-    <!-- Thông báo kết quả -->
+    <!-- Second Text View -->
     <TextView
         android:id="@+id/tvResultMessage"
-        android:layout_width="0dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Ngựa số X đã chiến thắng!"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Số tiền thắng/thua -->
+    <!-- Third Text View -->
     <TextView
         android:id="@+id/tvMoneyChange"
-        android:layout_width="0dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
+        android:layout_marginTop="8dp"
         android:text="Bạn đã thắng +500$"
         android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/tvResultMessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvResultMessage" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Nút đóng dialog -->
+    <!-- Close Button -->
     <Button
         android:id="@+id/btnCloseDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:backgroundTint="@android:color/holo_orange_light"
         android:text="Đóng"
+        android:textSize="16sp"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvMoneyChange"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMoneyChange" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
