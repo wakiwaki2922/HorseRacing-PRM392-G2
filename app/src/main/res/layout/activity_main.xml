@@ -3,177 +3,257 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
+    android:paddingHorizontal="20dp"
+    android:weightSum="6">
+    <!-- So du + Tien cuoc-->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- so du + tien cuoc -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Số dư: "
-            android:textSize="18sp" />
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:textAlignment="center">
+            <!-- Tien cuoc-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-        <TextView
-            android:id="@+id/tvBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiền cược: "
+                    android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" đồng"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/tvBet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" đồng"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <!-- so du-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số dư: "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đồng"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
+        android:background="#43d817"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tiền cược: "
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:weightSum="4">
 
-        <TextView
-            android:id="@+id/tvBet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <!-- Track 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_track1"
+                android:gravity="center_vertical"
+                android:padding="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" đồng"
-            android:textSize="18sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/horse" />
+            </LinearLayout>
+
+            <!-- Track 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_track2"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/horse2" />
+            </LinearLayout>
+
+            <!-- Track 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_track1"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="3"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/horse3" />
+            </LinearLayout>
+
+            <!-- Track 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_track2"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="4"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar4"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/horse4" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAddMoney"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Nạp tiền" />
 
-    <Button
-        android:id="@+id/btnChooseHorse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Chọn ngựa" />
-
+    <!-- buttons  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="4">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- button chon ngua-->
+        <Button
+            android:id="@+id/btnChooseHorse"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Ngựa 1"
-            android:textSize="16sp"
-            />
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Chọn ngựa" />
 
-        <SeekBar
-            android:id="@+id/seekBar1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressDrawable="@android:color/transparent"
-            android:thumb="@drawable/horse2"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ngựa 2"
-            android:textSize="16sp"
-            />
-
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressDrawable="@android:color/transparent"
-            android:thumb="@drawable/horse"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ngựa 3"
-            android:textSize="16sp"
-            />
-
-        <SeekBar
-            android:id="@+id/seekBar3"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressDrawable="@android:color/transparent"
-            android:thumb="@drawable/horse3"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ngựa 4"
-            android:textSize="16sp" />
-
-        <SeekBar
-            android:id="@+id/seekBar4"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:max="100"
-            android:progress="0"
-            android:progressDrawable="@android:color/transparent"
-            android:splitTrack="false"
-            android:thumb="@drawable/horse4"
-            android:paddingLeft="3dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
-
+        <!-- button bat dau-->
         <Button
             android:id="@+id/btnStart"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Bắt đầu" />
 
+        <!-- button nap tien -->
+        <Button
+            android:id="@+id/btnAddMoney"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Nạp tiền" />
+
+        <!-- button reset-->
         <Button
             android:id="@+id/btnReset"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Reset" />
     </LinearLayout>
