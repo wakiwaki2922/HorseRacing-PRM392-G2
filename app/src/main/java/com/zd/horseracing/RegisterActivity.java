@@ -2,6 +2,7 @@ package com.zd.horseracing;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
@@ -22,13 +23,21 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private Button btnRegister;
     private SharedPreferences sharedPreferences;
+    private MediaPlayer musicBg;
 
-
+    @Override
+    protected void onDestroy() {
+        musicBg.stop();
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        musicBg = MediaPlayer.create(this, R.raw.loginbackground);
+        musicBg.setLooping(true);
+        musicBg.start();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);

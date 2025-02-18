@@ -67,15 +67,16 @@ public class RaceViewModel extends AndroidViewModel {
         return repository.getCurrentBets();
     }
 
-    public void startRace() {
+    public boolean startRace() {
         if (!canStartRace()) {
-            return;
+            return false;
         }
 
         isRacing.setValue(true);
         needsReset.setValue(false);
         repository.updateBalance(-repository.getTotalBetAmount());
         updateBalanceAndBet();
+        return true;
     }
 
 

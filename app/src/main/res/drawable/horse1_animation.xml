@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/assasin1" android:duration="50" />
+    <item android:drawable="@drawable/assasin2" android:duration="50" />
+    <item android:drawable="@drawable/assasin3" android:duration="50" />
+    <item android:drawable="@drawable/assasin4" android:duration="50" />
+    <item android:drawable="@drawable/assasin5" android:duration="50" />
+    <item android:drawable="@drawable/assasin6" android:duration="50" />
+    <item android:drawable="@drawable/assasin7" android:duration="50" />
+    <!-- Bạn có thể thêm hoặc điều chỉnh thời gian (duration) tùy ý -->
+</animation-list>

@@ -2,6 +2,7 @@ package com.zd.horseracing;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
@@ -27,11 +28,22 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String DEFAULT_EMAIL = "user@gmail.com";
     private static final String DEFAULT_PASSWORD = "123456";
+    private MediaPlayer musicBg;
+
+    @Override
+    protected void onDestroy() {
+        musicBg.stop();
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        musicBg = MediaPlayer.create(this, R.raw.loginbackground);
+        musicBg.setLooping(true);
+        musicBg.start();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -62,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 
             if (validateInput(emailInput, passwordInput)) {
                 if (checkAccount(emailInput, passwordInput)) {
-                    Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-                    intentMain.putExtra("email", emailInput);
+
+                    Intent intentMain = new Intent(LoginActivity.this, InstructionActivity.class);
+                    intent.putExtra("email", emailInput);
+                  
                     startActivity(intentMain);
                     finish();
                 } else {

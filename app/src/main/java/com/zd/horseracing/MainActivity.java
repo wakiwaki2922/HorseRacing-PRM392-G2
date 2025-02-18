@@ -5,6 +5,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.Gravity;
 import android.app.Dialog;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,8 +19,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.zd.horseracing.Models.HorseBet;
@@ -41,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     private RaceViewModel viewModel;
     private Handler handler;
-
     private MediaPlayer bgMusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Lock the orientation to landscape
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         viewModel = new ViewModelProvider(this).get(RaceViewModel.class);
         handler = new Handler(Looper.getMainLooper());
@@ -205,27 +204,70 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRace() {
-        viewModel.startRace();
+
+        if (!viewModel.startRace()) {
+            return;
+        }
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.countdownfinalcut);
         mediaPlayer.setOnCompletionListener(mp -> {
             mp.release();
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (!viewModel.getIsRacing().getValue()) return;
+        // Array of drawable resources for horse animations
+        int[] horseDrawableRes = {
+                R.drawable.horse1_animation,
+                R.drawable.horse2_animation,
+                R.drawable.horse3_animation,
+                R.drawable.horse4_animation
+        };
 
-                    boolean hasWinner = false;
-                    SeekBar[] seekBars = {seekBar1, seekBar2, seekBar3, seekBar4};
+        // Array of SeekBars corresponding to each horse
+        SeekBar[] seekBars = { seekBar1, seekBar2, seekBar3, seekBar4 };
 
-                    for (int i = 0; i < seekBars.length; i++) {
-                        int progress = seekBars[i].getProgress() + new Random().nextInt(3);
-                        seekBars[i].setProgress(progress);
-                        if (progress >= 100) {
-                            hasWinner = true;
-                            viewModel.handleRaceFinished(i + 1);
-                            break;
+        // Array to store AnimationDrawable instances
+        final AnimationDrawable[] horseAnimations = new AnimationDrawable[seekBars.length];
+
+        // Initialize each SeekBar with its corresponding animation drawable
+        for (int i = 0; i < seekBars.length; i++) {
+            Drawable drawable = ContextCompat.getDrawable(this, horseDrawableRes[i]);
+            if (drawable == null) {
+                // Handle null drawable if necessary
+                continue;
+            }
+            seekBars[i].setThumb(drawable);
+            AnimationDrawable animation = (AnimationDrawable) seekBars[i].getThumb();
+            horseAnimations[i] = animation;
+            // Post the start to ensure drawable is ready
+            seekBars[i].post(animation::start);
+        }
+
+        // Create a single Random instance for performance
+        final Random random = new Random();
+        MediaPlayer mediaPlayer2 = MediaPlayer.create(this, R.raw.horsefootsteps);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (!viewModel.getIsRacing().getValue()) return;
+
+                mediaPlayer2.setLooping(true);
+                mediaPlayer2.start();
+
+                boolean hasWinner = false;
+
+                for (int i = 0; i < seekBars.length; i++) {
+                    int progress = seekBars[i].getProgress() + random.nextInt(3);
+                    seekBars[i].setProgress(progress);
+                    if (progress >= 100) {
+                        hasWinner = true;
+                        // Dừng animation cho tất cả các con ngựa
+                        for (AnimationDrawable anim : horseAnimations) {
+                            if (anim.isRunning()) {
+                                anim.stop();
+                            }
                         }
+                        mediaPlayer2.stop();
+                        viewModel.handleRaceFinished(i + 1);
+                        break;
                     }
+                }
 
                     if (!hasWinner) {
                         handler.postDelayed(this, 50);
@@ -233,15 +275,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         });
-        mediaPlayer.start();
 
+        mediaPlayer.start();
     }
 
     private void resetSeekBars() {
-        seekBar1.setProgress(0);
-        seekBar2.setProgress(0);
-        seekBar3.setProgress(0);
-        seekBar4.setProgress(0);
+        resetSeekBar(seekBar1, R.drawable.assasin1);
+        resetSeekBar(seekBar2, R.drawable.knight_walk_1);
+        resetSeekBar(seekBar3, R.drawable.ice_horse);
+        resetSeekBar(seekBar4, R.drawable.horse_bend_01);
+    }
+
+    private void resetSeekBar(SeekBar seekBar, int drawableRes) {
+        // Reset tiến độ của SeekBar
+        seekBar.setProgress(0);
+        Drawable thumbDrawable = ContextCompat.getDrawable(this, drawableRes);
+        seekBar.setThumb(thumbDrawable);
     }
 
     private void showResultDialog(String result) {
