@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
-        Intent intent = getIntent();
 
 
 
@@ -75,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 
             if (validateInput(emailInput, passwordInput)) {
                 if (checkAccount(emailInput, passwordInput)) {
+
                     Intent intentMain = new Intent(LoginActivity.this, InstructionActivity.class);
                     intent.putExtra("email", emailInput);
+                  
                     startActivity(intentMain);
                     finish();
                 } else {

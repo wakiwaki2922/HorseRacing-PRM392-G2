@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="6"
-    android:background="@drawable/gradient_track2"
->
+    android:background="@drawable/gradient_track2">
+
 <!-- So du + Tien cuoc-->
 <RelativeLayout
     android:layout_width="match_parent"
@@ -54,7 +54,6 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/landscape" />
         </LinearLayout>
-
     </LinearLayout>
 
     <!-- Bet and Balance on the top right corner -->
@@ -66,24 +65,21 @@
         android:layout_alignParentRight="true"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#420420"
-    >
+        android:background="#420420">
 
         <!-- Bet section -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="end"
-        >
+            android:layout_gravity="end">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tiền cược: "
                 android:textColor="@color/white"
-                android:textSize="20sp"
-            />
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tvBet"
@@ -92,16 +88,14 @@
                 android:text="0"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-            />
+                android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" đồng"
                 android:textSize="18sp"
-                android:textColor="@color/white"
-            />
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <!-- Balance section -->
@@ -116,8 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="Số dư: "
                 android:textSize="18sp"
-                android:textColor="@color/white"
-            />
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvBalance"
@@ -126,19 +119,16 @@
                 android:text="1000"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-            />
+                android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" đồng"
                 android:textSize="18sp"
-                android:textColor="@color/white"
-            />
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>
 
 <RelativeLayout
@@ -166,139 +156,19 @@
                 android:layout_height="18dp"
                 android:layout_weight="1"
                 android:src="@drawable/fence2" />
-
+            <!-- Repeated 21 more times -->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="18dp"
                 android:layout_weight="1"
                 android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="18dp"
                 android:layout_weight="1"
                 android:src="@drawable/flag_finish" />
         </LinearLayout>
+
         <!-- Track 1 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -327,6 +197,7 @@
                 android:progressDrawable="@android:color/transparent"
                 android:thumb="@drawable/assasin1" />
         </LinearLayout>
+
         <!-- Track 2 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -355,6 +226,7 @@
                 android:progressDrawable="@android:color/transparent"
                 android:thumb="@drawable/knight_walk_1" />
         </LinearLayout>
+
         <!-- Track 3 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -383,6 +255,7 @@
                 android:progressDrawable="@android:color/transparent"
                 android:thumb="@drawable/ice_horse" />
         </LinearLayout>
+
         <!-- Track 4 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -411,162 +284,35 @@
                 android:progressDrawable="@android:color/transparent"
                 android:thumb="@drawable/horse_bend_01" />
         </LinearLayout>
-        <!-- fence-->
+
+        <!-- Bottom fence -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="4">
+            android:orientation="horizontal"
+            android:weightSum="23">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="23">
-
-                <!-- Repeat the fence2 images -->
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/fence2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/flag_finish" />
-            </LinearLayout>
-
+            <!-- Repeat the fence2 images -->
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:src="@drawable/fence2" />
+            <!-- Repeated 21 more times -->
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:src="@drawable/fence2" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:src="@drawable/flag_finish" />
         </LinearLayout>
     </LinearLayout>
-    <!-- finish -->
+
+    <!-- finish line -->
     <ImageView
         android:id="@+id/finishLine"
         android:layout_width="5dp"
@@ -576,6 +322,7 @@
         android:layout_marginEnd="5dp"
         android:background="@drawable/finish_race" />
 </RelativeLayout>
+
 <!-- buttons  -->
 <LinearLayout
     android:layout_width="match_parent"
@@ -586,8 +333,8 @@
     android:weightSum="4"
     android:background="@drawable/gradient_track1"
     android:layout_gravity="center_vertical"
-    android:layout_marginHorizontal="20dp"
->
+    android:layout_marginHorizontal="20dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -596,7 +343,7 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <!-- button chon ngua-->
+        <!-- button chon ngua -->
         <Button
             android:id="@+id/btnChooseHorse"
             android:layout_width="150dp"
@@ -604,19 +351,17 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Chọn ngựa"
-            android:background="@drawable/custom_button"
-            />
+            android:background="@drawable/custom_button"/>
 
-        <!-- button bat dau--> 
-         <Button
+        <!-- button bat dau -->
+        <Button
             android:id="@+id/btnStart"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Bắt đầu"
-            android:background="@drawable/custom_button"
-        />
+            android:background="@drawable/custom_button"/>
 
         <!-- button nap tien -->
         <Button
@@ -626,9 +371,9 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Nạp tiền"
-            android:background="@drawable/custom_button"
-        /> 
-      <!-- button reset-->
+            android:background="@drawable/custom_button"/>
+
+        <!-- button reset -->
         <Button
             android:id="@+id/btnReset"
             android:layout_width="150dp"
@@ -636,8 +381,8 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Reset"
-            android:background="@drawable/custom_button"
-        />
+            android:background="@drawable/custom_button"/>
     </LinearLayout>
 </LinearLayout>
+
 </LinearLayout>
