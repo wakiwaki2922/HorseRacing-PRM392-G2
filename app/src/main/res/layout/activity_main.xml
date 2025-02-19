@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Root Layout: LinearLayout contains the entire interface, vertically aligned and weighted -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,383 +7,384 @@
     android:weightSum="6"
     android:background="@drawable/gradient_track2">
 
-<!-- So du + Tien cuoc-->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <!-- Balance + Bet Section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Main background layout -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_weight="3"
-        android:orientation="horizontal">
-
-        <!-- Image section -->
+        <!-- Main background layout (for the landscape images) -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_margin="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/landscape" />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_margin="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/landscape" />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_margin="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/landscape" />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_margin="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/landscape" />
+            <!-- Image section (repeating landscape images) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:orientation="horizontal">
+
+                <!-- Repeated landscape images -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_margin="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/landscape" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <!-- Bet and Balance on the top right corner -->
-    <LinearLayout
-        android:id="@+id/topRightLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#420420">
-
-        <!-- Bet section -->
+        <!-- Bet and Balance on the top right corner -->
         <LinearLayout
+            android:id="@+id/topRightLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="end">
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#420420">
 
-            <TextView
+            <!-- Bet section -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tiền cược: "
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:orientation="horizontal"
+                android:layout_gravity="end">
 
-            <TextView
-                android:id="@+id/tvBet"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bet: "
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tvBet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" vnd"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <!-- Balance section -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:orientation="horizontal"
+                android:layout_gravity="end">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đồng"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Balance: "
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/tvBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" vnd"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
 
-        <!-- Balance section -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="end">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Số dư: "
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/tvBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" đồng"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="262dp"
-    android:background="#43d817"
-    android:orientation="vertical">
-
-    <!-- fences -->
-    <LinearLayout
+    <!-- Race Track Section -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="4">
-        <!-- fence -->
+        android:layout_height="262dp"
+        android:background="#43d817"
+        android:orientation="vertical">
+
+        <!-- Fences (Top and Bottom Fence Layouts) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="23">
-
-            <!-- Repeat the fence2 images -->
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-            <!-- Repeated 21 more times -->
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/flag_finish" />
-        </LinearLayout>
-
-        <!-- Track 1 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@drawable/lane"
-            android:gravity="center_vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="1"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <SeekBar
-                android:id="@+id/seekBar1"
+            android:orientation="vertical"
+            android:weightSum="4">
+            <!-- Top fence -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/assasin1" />
-        </LinearLayout>
-
-        <!-- Track 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@drawable/lane2"
-            android:gravity="center_vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="2"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:weightSum="23">
 
-            <SeekBar
-                android:id="@+id/seekBar2"
+                <!-- Repeat the fence2 images -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fence2" />
+                <!-- Repeated 21 more times -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fence2" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/flag_finish" />
+            </LinearLayout>
+
+            <!-- Track 1 (with SeekBar) -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/knight_walk_1" />
-        </LinearLayout>
+                android:background="@drawable/lane"
+                android:gravity="center_vertical"
+                android:padding="8dp">
 
-        <!-- Track 3 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@drawable/lane"
-            android:gravity="center_vertical"
-            android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <SeekBar
+                    android:id="@+id/seekBar1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/assasin1" />
+            </LinearLayout>
+
+            <!-- Track 2 (with SeekBar) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/lane2"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/knight_walk_1" />
+            </LinearLayout>
+
+            <!-- Track 3 (with SeekBar) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/lane"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="3"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/ice_horse" />
+            </LinearLayout>
+
+            <!-- Track 4 (with SeekBar) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/lane2"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="4"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <SeekBar
+                    android:id="@+id/seekBar4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@drawable/horse_bend_01" />
+            </LinearLayout>
+
+            <!-- Bottom fence -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="3"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:weightSum="23">
 
-            <SeekBar
-                android:id="@+id/seekBar3"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/ice_horse" />
+                <!-- Repeat the fence2 images -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fence2" />
+                <!-- Repeated 21 more times -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fence2" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/flag_finish" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Track 4 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@drawable/lane2"
-            android:gravity="center_vertical"
-            android:padding="8dp">
+        <!-- Finish line -->
+        <ImageView
+            android:id="@+id/finishLine"
+            android:layout_width="5dp"
+            android:layout_height="226dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/finish_race" />
+    </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="4"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <SeekBar
-                android:id="@+id/seekBar4"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@android:color/transparent"
-                android:thumb="@drawable/horse_bend_01" />
-        </LinearLayout>
-
-        <!-- Bottom fence -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="23">
-
-            <!-- Repeat the fence2 images -->
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-            <!-- Repeated 21 more times -->
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/fence2" />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="18dp"
-                android:layout_weight="1"
-                android:src="@drawable/flag_finish" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- finish line -->
-    <ImageView
-        android:id="@+id/finishLine"
-        android:layout_width="5dp"
-        android:layout_height="226dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/finish_race" />
-</RelativeLayout>
-
-<!-- buttons  -->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:gravity="center_horizontal"
-    android:orientation="horizontal"
-    android:weightSum="4"
-    android:background="@drawable/gradient_track1"
-    android:layout_gravity="center_vertical"
-    android:layout_marginHorizontal="20dp">
-
+    <!-- Buttons Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:weightSum="4">
-
-        <!-- button chon ngua -->
-        <Button
-            android:id="@+id/btnChooseHorse"
-            android:layout_width="150dp"
+        android:weightSum="4"
+        android:background="@drawable/gradient_track1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="20dp">
+        <!-- Buttons Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Chọn ngựa"
-            android:background="@drawable/custom_button"/>
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="4">
 
-        <!-- button bat dau -->
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Bắt đầu"
-            android:background="@drawable/custom_button"/>
+            <!-- Choose horse button -->
+            <Button
+                android:id="@+id/btnChooseHorse"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Choose Horse"
+                android:background="@drawable/custom_button"/>
 
-        <!-- button nap tien -->
-        <Button
-            android:id="@+id/btnAddMoney"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Nạp tiền"
-            android:background="@drawable/custom_button"/>
+            <!-- Start button -->
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Start"
+                android:background="@drawable/custom_button"/>
 
-        <!-- button reset -->
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Reset"
-            android:background="@drawable/custom_button"/>
+            <!-- Add money button -->
+            <Button
+                android:id="@+id/btnAddMoney"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Add Money"
+                android:background="@drawable/custom_button"/>
+
+            <!-- Reset button -->
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Reset"
+                android:background="@drawable/custom_button"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-
 </LinearLayout>
